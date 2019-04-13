@@ -4,6 +4,7 @@
 # Richie McMullen
 # 2019
 
+
 namespace CodeToad\Strava;
 
 class Strava
