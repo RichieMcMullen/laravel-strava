@@ -63,17 +63,17 @@ php artisan vendor:publish --provider="CodeToad\Strava\StravaServiceProvider"
 This commmand will publish a file named `ct_strava.php` within your laravel project `config/ct_strava.php`. Edit this file with your Strava API credentials, generated from the Strava app you created.
 
 ```php
-'client_id' => env('CT_STRAVA_CLIENT_ID', 'ADD STRAVA CLIENT ID HERE')
-'client_secret' => env('CT_STRAVA_SECRET_ID', 'ADD STRAVA SECRET HERE')
-'redirect_uri' => env('CT_STRAVA_REDIRECT_URI', 'ADD STRAVA REDIRECT URI HERE')
+'client_id' => env('CT_STRAVA_CLIENT_ID', '')
+'client_secret' => env('CT_STRAVA_SECRET_ID', '')
+'redirect_uri' => env('CT_STRAVA_REDIRECT_URI', '')
 ```
 
 Alternatively you can ignore the above publish command and add this following variables to your `.env` file. Make sure to add your Strava App credentials
 
 ```shell
-CT_STRAVA_CLIENT_ID=ADD STRAVA CLIENT ID HERE
-CT_STRAVA_SECRET_ID=ADD STRAVA SECRET HERE
-CT_STRAVA_REDIRECT_URI=ADD STRAVA REDIRECT URI HERE
+CT_STRAVA_CLIENT_ID=ADD-STRAVA-CLIENT-ID-HERE
+CT_STRAVA_SECRET_ID=ADD-STRAVA-SECRET-HERE
+CT_STRAVA_REDIRECT_URI=ADD-STRAVA-REDIRECT-URI-HERE
 ```
 
 
