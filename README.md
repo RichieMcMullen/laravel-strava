@@ -1,6 +1,6 @@
 
 <div style="display: inline: block">
-  <img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/tag/richiemcmullen/laravel-strava.svg">
+  <img alt="GitHub release" src="https://img.shields.io/github/release/richiemcmullen/laravel-strava.svg?color=%23FF4A00">
   <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/richiemcmullen/laravel-strava.svg">
   <img alt="GitHub stars" src="https://img.shields.io/github/stars/richiemcmullen/laravel-strava.svg">
   <img alt="GitHub forks" src="https://img.shields.io/github/forks/richiemcmullen/laravel-strava.svg">
