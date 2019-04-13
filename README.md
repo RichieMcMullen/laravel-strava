@@ -1,3 +1,6 @@
+
+<img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/tag/richiemcmullen/laravel-strava.svg">
+
 # Laravel Strava Package
 
 A laravel package to access data from the Strava API. Compatible with ```Laravel 5.0``` and above.
@@ -159,9 +162,9 @@ try {
 } catch (\Exception $e) {
 
   # If theres a problem getting the data from the method above,
-  # it maybe that your access token has expired.
+  # it maybe that the user access token has expired.
 
-  # Lets use the users stored 'refresh_token' to obtain a new access token
+  # Use the users stored 'refresh_token' to obtain a new access token
   $data = Strava::refreshToken($refreshToken); // Pass user refresh token
 
   # Check the '$data' array contains both tokens
