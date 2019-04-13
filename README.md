@@ -1,6 +1,6 @@
 # Laravel Strava Package
 
-A laravel package to access data from the Strava API. Compatible with ```Laravel 5.0``` and above
+A laravel package to access data from the Strava API. Compatible with ```Laravel 5.0``` and above.
 
 ## Table of Contents
 
