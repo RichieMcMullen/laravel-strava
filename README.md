@@ -4,6 +4,8 @@
   <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/richiemcmullen/laravel-strava.svg">
   <img alt="GitHub stars" src="https://img.shields.io/github/stars/richiemcmullen/laravel-strava.svg">
   <img alt="GitHub forks" src="https://img.shields.io/github/forks/richiemcmullen/laravel-strava.svg">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/richiemcmullen/laravel-strava.svg">
+  <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/richiemcmullen/laravel-strava.svg">
 </div>
 
 # Laravel Strava Package
