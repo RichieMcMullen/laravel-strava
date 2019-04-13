@@ -3,7 +3,8 @@
     "description": "A laravel package to access data from the Strava API.",
     "type": "library",
     "require": {
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "illuminate/support": "^5.0"
     },
     "autoload": {
         "psr-4": {
