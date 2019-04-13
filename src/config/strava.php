@@ -6,8 +6,8 @@
 
 return [
 
-  'client_id' => env('CT_STRAVA_CLIENT_ID', 'ADD STRAVA CLIENT ID HERE'),
-  'client_secret' => env('CT_STRAVA_SECRET_ID', 'ADD STRAVA SECRET HERE'),
-  'redirect_uri' => env('CT_STRAVA_REDIRECT_URI', 'ADD STRAVA REDIRECT URI HERE'),
+  'client_id' => env('CT_STRAVA_CLIENT_ID', ''),
+  'client_secret' => env('CT_STRAVA_SECRET_ID', ''),
+  'redirect_uri' => env('CT_STRAVA_REDIRECT_URI', ''),
 
 ];
