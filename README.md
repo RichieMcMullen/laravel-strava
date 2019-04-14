@@ -170,12 +170,18 @@ public function refreshToken(Request $request)
   // Get the user
   $user = User::find($request->id);
 
+  // Check if current token has expired
   if(Carbon::now() > $user->expires_at)
   {
     // Token has expired, generate new tokens
     $refresh = Strava::refreshToken($user->refresh_token);
 
-    // Update database $token->access_token & $token->refresh_token for the user
+    // Update the users tokens
+    User::where('id', $request->id)
+    ->update([
+      'access_token' => $refresh->access_token,
+      'refresh_token' => $refresh->refresh_token
+    ]);
 
     // Call Strava Athlete Method with newly updated access token.
     $athlete = Strava::athlete($user->access_token);
