@@ -53,7 +53,7 @@ A laravel package to access data from the Strava API. Compatible with ```Laravel
 
 ## Strava Access Credentials
 
-In order to use this package you will need to create an app from within your strava account [Create Strava App](https://www.strava.com/settings/api) to access your API credentials. Click here for more information on the [Strava API](https://developers.strava.com/).
+In order to use this package you will need to create an app from within your strava account. [Create Strava App](https://www.strava.com/settings/api) to access your API credentials. Click here for more information on the [Strava API](https://developers.strava.com/).
 
 
 ## Installation
