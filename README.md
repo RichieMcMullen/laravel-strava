@@ -176,8 +176,7 @@ public function refreshToken(Request $request)
     $refresh = Strava::refreshToken($user->refresh_token);
 
     // Update the users tokens
-    User::where('id', $request->id)
-    ->update([
+    User::where('id', $request->id)->update([
       'access_token' => $refresh->access_token,
       'refresh_token' => $refresh->refresh_token
     ]);
