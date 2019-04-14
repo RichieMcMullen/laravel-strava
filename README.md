@@ -202,7 +202,7 @@ public function refreshToken(Request $request)
 
 #### Unauthenticate User
 
-You can allow users to unauthenticate their Strava account with you Strava app. Simply allow users to call the following method, passing the access token that has been stored for their account.
+You can allow users to unauthenticate their Strava account with your Strava app. Simply allow users to call the following method, passing the access token that has been stored for their account.
 
 ```php
 Strava::unauthenticate($token);
