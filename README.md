@@ -162,11 +162,12 @@ Example Response
 
 Access tokens will now expire after 6 hours under the new flow that Strava have implemented and will need to be updated using a refresh token. In the example above you can see the response has a `refresh_token` and an `expires_at` field. When storing the user access tokens you may also want to store the `expires_at` field too. This will allow you to check when the current access token has expired.
 
-When calling any of the Strava methods below you may want to compare the current time against the `expires_at` field in order to validate the token. If the token is expired you'll need to call the `Strava::refreshToken($refreshToken)` method in order to generate a new tokens. All you need to do is pass the users currently stored `refresh_token`, the method will then return a new set of tokens (access & refresh), update the current users tokens with the tokens from the response. Heres an example of how that might work, using the `Strava::athlete($token)` method.
+When calling any of the Strava methods below you may want to compare the current time against the `expires_at` field in order to validate the token. If the token is expired you'll need to call the `Strava::refreshToken($refreshToken)` method in order to generate a new tokens. All you need to do is pass the users currently stored `refresh_token`, the method will then return a new set of tokens (access & refresh), update the current users tokens with the new tokens from the response. Heres an example of how that might work, using the `Strava::athlete($token)` method.
 
 ```php
 public function refreshToken(Request $request)
 {
+  // Get the user
   $user = User::find($request->id);
 
   if(Carbon::now() > $user->expires_at)
