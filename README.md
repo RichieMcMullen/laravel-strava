@@ -135,7 +135,7 @@ public function stravaAuth()
 
 #### Obtain User Access Token
 
-When returned to the redirected uri, call the `Strava::token($code)` method to generate the users Strava access token & refresh token. The tokens are generated using the `code` parameter value within the redirected uri. Be sure to store the users `access_token` & `refresh_token` in your database for the relevant user.
+When returned to the redirected uri, call the `Strava::token($code)` method to generate the users Strava access token & refresh token. The tokens are generated using the `code` parameter value within the redirected uri. Be sure to store the users `access_token` & `refresh_token` in your database.
 
 ```php
 public function getToken(Request $request)
@@ -160,7 +160,43 @@ Example Response
 
 #### Access Token Expiry
 
-Access tokens will now expire after 6 hours under the new flow that Strava have implemented and will need to be updated using a refresh token. A refresh token is retrieved from the initial access token request made in the previous step. When calling any of the methods below you might want to use a `try catch` block to check the current access token expiry, if expired you need to call the refresh token method. To refresh an access token take a look at the example code below.
+Access tokens will now expire after 6 hours under the new flow that Strava have implemented and will need to be updated using a refresh token. In the example above you can see the response has a `refresh_token` and an `expires_at` field. When storing the user access tokens you may also want to store the `expires_at` field too. This will allow you to check when the current access token has expired.
+
+When calling any of the Strava methods below you may want to compare the current time against the `expires_at` field in order to validate the token. If the token is expired you'll need to call the `Strava::refreshToken($refreshToken)` method in order to generate a new access token. All you need to do is pass the users currently stored `refresh_token`, the method will then return a new set of tokens (access & refresh), update the current users tokens with the tokens from the response. Heres an example of how that might work, using the `Strava::athlete($token)` method.
+
+```php
+public function refreshToken(Request $request)
+{
+  $user = User::find($request->id);
+
+  if(Carbon::now() > $user->expires_at)
+  {
+    // Token has expired, generate new tokens
+    $refresh = Strava::refreshToken($user->refresh_token);
+
+    // Update database $token->access_token & $token->refresh_token for the user
+
+    // Call Strava Athlete Method with newly updated access token.
+    $athlete = Strava::athlete($user->access_token);
+
+    // Return $athlete array to view
+    return view('strava.athlete')->with(compact('athlete'));
+
+  }else{
+
+    // Token has not yet expired, Call Strava Athlete Method
+    $athlete = Strava::athlete($user->access_token);
+
+    // Return $athlete array to view
+    return view('strava.athlete')->with(compact('athlete'));
+
+  }
+
+}
+```
+
+
+A refresh token is retrieved from the initial access token request made in the previous step. When calling any of the methods below you might want to use a `try catch` block to check the current access token expiry, if expired you need to call the refresh token method. To refresh an access token take a look at the example code below.
 
 ```php
 Strava::refreshToken($refreshToken);
