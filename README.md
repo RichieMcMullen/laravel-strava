@@ -27,7 +27,6 @@ A laravel package to access data from the Strava API. Compatible with ```Laravel
   - [Authenticate User](https://github.com/RichieMcMullen/strava#authenticate-user)
   - [Get Access Token](https://github.com/RichieMcMullen/strava#get-access-token)
   - [Access Token Expiry](https://github.com/RichieMcMullen/strava#access-token-expiry)
-  - [Example Usage](https://github.com/RichieMcMullen/strava#example-usage)
   - [Unauthenticate User](https://github.com/RichieMcMullen/strava#unauthenticate-user)
 - [Available Methods](https://github.com/RichieMcMullen/strava#usage)
   - [Athlete Data](https://github.com/RichieMcMullen/strava#athelete-data)
@@ -202,49 +201,9 @@ public function refreshToken(Request $request)
 }
 ```
 
-
-A refresh token is retrieved from the initial access token request made in the previous step. When calling any of the methods below you might want to use a `try catch` block to check the current access token expiry, if expired you need to call the refresh token method. To refresh an access token take a look at the example code below.
-
 ```php
 Strava::refreshToken($refreshToken);
 ```
-
-#### Example Usage
-
-This is an example of how you might fetch Strava data for a user using their authenticated `access token` that you have stored in your database. If theres an error while retrieving the data, it may be that the users access token has expired. In this case, the example below will use the user `refresh token` to automatically generate and store a new access token.
-
-```php
-try {
-
-  # Get Athlete Data
-  Strava::athlete($token); // Pass user access token
-
-} catch (\Exception $e) {
-
-  # If theres a problem getting the data from the method above,
-  # it maybe that the user access token has expired.
-
-  # Use the users stored 'refresh_token' to obtain a new access token
-  $data = Strava::refreshToken($refreshToken); // Pass user refresh token
-
-  # Check the '$data' array contains both tokens
-  if($data->access_token && $data->refresh_token)
-  {
-    # Update users Strava access and refresh tokens
-    # Database update code here...
-
-    # Call Athlete Data Method with New Token, for this request!
-    Strava::athlete($data->access_token);
-
-  }else{
-    // log the error
-    \Log::info($e->getMessage());
-  }
-}
-```
-
-All subsequent requests will use the token stored in your database, as long as it hasn't expired. If it has, it will go through the `catch` block and once again and refresh the users tokens.
-
 
 #### Unauthenticate User
 
