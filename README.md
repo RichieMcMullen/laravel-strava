@@ -376,13 +376,13 @@ Strava::starredSegments($token, $page, $perPage);
 ## Parameter Types
 
 ```php
-$token = String
-$activityID = integer
-$athleteID = integer
-$clubID = integer
-$gearID = integer
-$routeID = integer
-$segmentID = integer
-$page = integer
-$perPage = integer
+$token        = String
+$activityID   = integer
+$athleteID    = integer
+$clubID       = integer
+$gearID       = integer
+$routeID      = integer
+$segmentID    = integer
+$page         = integer
+$perPage      = integer
 ```
