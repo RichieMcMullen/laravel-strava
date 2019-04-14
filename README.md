@@ -92,7 +92,7 @@ CT_STRAVA_REDIRECT_URI=ADD-STRAVA-REDIRECT-URI-HERE
 
 ## Auto Discovery
 
-If you're using Laravel 5.5+ you don't need to manually add the service provider or facade. This will be Auto-Discovered. For all versions of Laravel below 5.5 add the ServiceProvider & StravaFacade to the appropriate arrays within your Laravel project `config/app.php`
+If you're using Laravel 5.5+ you don't need to manually add the service provider or facade. This will be Auto-Discovered. For all versions of Laravel below 5.5, you must manually add the ServiceProvider & Facade to the appropriate arrays within your Laravel project `config/app.php`.
 
 
 #### Provider
