@@ -127,7 +127,10 @@ class MyController extends Controller
 Redirect user to Strava to authenticate. If authentication is successful the user will be redirected to the `redirect_uri` that you added to the `config` file or your `.env` file
 
 ```php
-Strava::authenticate();
+public function authenticate()
+{
+  return Strava::authenticate();
+}
 ```
 
 #### Get Access Token
@@ -135,8 +138,11 @@ Strava::authenticate();
 When returned to the redirected uri, use the following method within one of your controllers to generate the users Strava access token. The access token is generated via the `code` parameter within the redirected url. This token should be stored in a database or likewise for the related user so it can be used to access their Strava data using the methods below. A refresh token is also supplied in the response, be sure to save that too, as it will be needed to automatically generate new access tokens once the current token expires.
 
 ```php
-$code = request()->code;
-$token = Strava::token($code);
+public function getToken(Request $request)
+{
+  $code = $request->code;
+  $token = Strava::token($code);
+}
 ```
 
 Example Response
