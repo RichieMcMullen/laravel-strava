@@ -67,11 +67,13 @@ composer require codetoad/strava
 
 ## Publish Strava Config File
 
+The `vendor:publish` commmand will publish a file named `ct_strava.php` within your laravel project config folder `config/ct_strava.php`. Edit this file with your Strava API credentials, generated from the Strava app you created.
+
 ```shell
 php artisan vendor:publish --provider="CodeToad\Strava\StravaServiceProvider"
 ```
 
-This commmand will publish a file named `ct_strava.php` within your laravel project `config/ct_strava.php`. Edit this file with your Strava API credentials, generated from the Strava app you created.
+Published Config File Contents
 
 ```php
 'client_id' => env('CT_STRAVA_CLIENT_ID', '')
