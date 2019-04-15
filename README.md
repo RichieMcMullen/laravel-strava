@@ -216,7 +216,7 @@ Strava::unauthenticate($token);
 
 ## Available Methods
 
-All methods require an access token, some require additional parameters mentioned below.
+All methods require an access token, some methods accept additional optional parameters listed below.
 
 - Optional Parameters
   - $perpage (Int - default 10)
