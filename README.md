@@ -216,7 +216,13 @@ Strava::unauthenticate($token);
 
 ## Available Methods
 
-All methods require an access token, some require additional parameters mentioned below. All "perPage" parameters default to 10 and it is an optional parameter.
+All methods require an access token, some require additional parameters mentioned below.
+
+- Optional Parameters
+  - $perpage (Int - default 10)
+  - $perpage (Int - default 10)
+  - $before (Int/Timestamp - default = 10)
+  - $after (Int/Timestamp - default = most recent)
 
 #### Athlete Data
 
@@ -231,7 +237,7 @@ Strava::athlete($token);
 Returns the activities of an athlete.
 
 ```php
-Strava::activities($token, $perPage);
+Strava::activities($token, $perPage, $after, $before);
 ```
 
 #### User Single Activity
