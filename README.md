@@ -405,6 +405,6 @@ Caching your Strava data will drastically improve website load times.
 
 ## Useful Links
 
-[x] [Laravel Caching Documentation](https://laravel.com/docs/5.8/cache)
+- [Laravel Caching Documentation](https://laravel.com/docs/5.8/cache)
 - [Strava Developers](https://developers.strava.com/)
 - [Strava App Creation](https://www.strava.com/settings/api)
