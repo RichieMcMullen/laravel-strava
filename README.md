@@ -159,6 +159,8 @@ Example Response
 "athlete": ...
 ```
 
+At this point you have access to the `Athlete` object that can be used to login to your website. Of course you'll need to write the logic for your login system, but the athlete name, email etc.. is contained within the object for you to verify the user against your own database data.
+
 #### Access Token Expiry
 
 Access tokens will now expire after 6 hours under the new flow that Strava have implemented and will need to be updated using a refresh token. In the example above you can see the response has a `refresh_token` and an `expires_at` field. When storing the user access tokens you may also want to store the `expires_at` field too. This will allow you to check when the current access token has expired.
