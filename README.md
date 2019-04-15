@@ -221,7 +221,7 @@ All methods require an access token, some methods accept additional optional par
 - Optional Parameters
   - $perpage (Int - default 10)
   - $perpage (Int - default 10)
-  - $before (Int/Timestamp - default = 10)
+  - $before (Int/Timestamp - default = most recent)
   - $after (Int/Timestamp - default = most recent)
 
 #### Athlete Data
