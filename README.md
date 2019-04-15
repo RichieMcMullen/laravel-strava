@@ -404,12 +404,7 @@ Strava have quite a good API Rate Limit, 600 requests every 15 minutes, 30,000 d
 Caching your Strava data will drastically improve website load times.
 
 ## Useful Links
-<div style="display: block">
-[Laravel Caching Documentation](https://laravel.com/docs/5.8/cache)
-</div>
-<div style="display: block">
-[Strava Developers](https://developers.strava.com/)
-</div>
-<div style="display: block">
-[Strava App Creation](https://www.strava.com/settings/api)
-</div>
+
+- [Laravel Caching Documentation](https://laravel.com/docs/5.8/cache)
+- [Strava Developers](https://developers.strava.com/)
+- [Strava App Creation](https://www.strava.com/settings/api)
