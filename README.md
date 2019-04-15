@@ -397,6 +397,8 @@ $routeID      = integer
 $segmentID    = integer
 $page         = integer
 $perPage      = integer
+$before       = integer (timestamp)
+$after        = integer (timestamp)
 ```
 
 ## Caching
