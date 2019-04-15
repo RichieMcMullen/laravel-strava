@@ -390,3 +390,20 @@ $segmentID    = integer
 $page         = integer
 $perPage      = integer
 ```
+
+## Caching
+
+It's highly recommended that you cache your requests made to Strava for 2 reasons.
+
+#### (1) Rate Limiting
+
+Strava have quite a good API Rate Limit, 600 requests every 15 minutes, 30,000 daily. If your website is big you might want to consider caching your Strava response data so you don't exceed these limits.
+
+#### (2) Website Loading Speed
+
+Caching your Strava data will drastically improve website load times.
+
+## Useful Links
+[Laravel Caching Documentation](https://laravel.com/docs/5.8/cache)
+[Strava Developers](https://developers.strava.com/)
+[Strava App Creation](https://www.strava.com/settings/api)
