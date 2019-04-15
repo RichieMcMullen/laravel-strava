@@ -107,9 +107,18 @@ class Strava
     #
     # Strava User Activities
     #
-    public function activities($token, $perPage = 10)
+    public function activities($token, $perPage = 10, $after = null, $before = null)
     {
         $url = $this->strava_uri . '/athlete/activities?per_page=' . $perPage;
+
+        if ($after !== null) {
+            $url .= '&after=' . $after;
+        }
+
+        if ($before !== null) {
+            $url .= '&before=' . $before;
+        }
+
         $config = $this->bearer($token);
         $res = $this->get($url, $config);
         return $res;
