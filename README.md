@@ -50,6 +50,8 @@ A laravel package to access data from the Strava API. Compatible with ```Laravel
   - [Segment Effort](https://github.com/RichieMcMullen/strava#segment-effort)
   - [Starred Segments](https://github.com/RichieMcMullen/strava#starred-segments)
 - [Parameter Types](https://github.com/RichieMcMullen/strava#parameter-types)
+- [Caching](https://github.com/RichieMcMullen/laravel-strava#caching)
+- [Useful Links](https://github.com/RichieMcMullen/laravel-strava#useful-links)
 
 ## Strava Access Credentials
 
