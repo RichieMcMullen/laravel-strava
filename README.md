@@ -178,7 +178,7 @@ public function myControllerFunction(Request $request)
   // Check if current token has expired
   if(Carbon::now() > $user->expires_at)
   {
-    // Token has expired, generate new tokens
+    // Token has expired, generate new tokens using the currently stored user refresh token
     $refresh = Strava::refreshToken($user->refresh_token);
 
     // Update the users tokens
