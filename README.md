@@ -237,7 +237,7 @@ Strava::athlete($token);
 Returns the activities of an athlete.
 
 ```php
-Strava::activities($token, $perPage, $after, $before);
+Strava::activities($token, $page, $perPage, $before, $after);
 ```
 
 #### User Single Activity

@@ -107,9 +107,9 @@ class Strava
     #
     # Strava User Activities
     #
-    public function activities($token, $perPage = 10, $after = null, $before = null)
+    public function activities($token, $page = 1, $perPage = 10, $before = null, $after = null)
     {
-        $url = $this->strava_uri . '/athlete/activities?per_page=' . $perPage;
+        $url = $this->strava_uri . '/athlete/activities?page=' . $page . '&per_page=' . $perPage;
 
         if ($after !== null) {
             $url .= '&after=' . $after;
