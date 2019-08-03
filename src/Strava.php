@@ -138,7 +138,22 @@ class Strava
 
 
     #
-    # Strava Single Activity
+    # Strava Single Activity Stream
+    #
+    public function activityStream($token, $activityID, $keys = '', $keyByType = true)
+    {
+        if ($keys != '')
+            $keys = join(",", $keys);
+        
+        $url = $this->strava_uri . '/activities/'. $activityID .'/streams?keys='. $keys .'&key_by_type'. $keyByType;
+        $config = $this->bearer($token);
+        $res = $this->get($url, $config);
+        return $res;
+    }
+
+
+    #
+    # Strava Single Activity Comments
     #
     public function activityComments($token, $activityID, $page = 1, $perPage = 10)
     {
