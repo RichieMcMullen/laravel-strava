@@ -32,6 +32,7 @@ A laravel package to access data from the Strava API. Compatible with ```Laravel
   - [Athlete Data](https://github.com/RichieMcMullen/strava#athelete-data)
   - [User Activities Data](https://github.com/RichieMcMullen/strava#user-activities-data)
   - [User Single Activity](https://github.com/RichieMcMullen/strava#user-single-activity)
+  - [User Single Activity Stream](https://github.com/RichieMcMullen/strava#user-single-activity-stream)
   - [Activity Comments](https://github.com/RichieMcMullen/strava#activity-comments)
   - [Activity Kudos](https://github.com/RichieMcMullen/strava#activity-kudos)
   - [Activity Laps](https://github.com/RichieMcMullen/strava#activity-laps)
@@ -246,6 +247,16 @@ Returns the given activity that is owned by the authenticated athlete.
 
 ```php
 Strava::activity($token, $activityID);
+```
+
+#### User Single Activity Stream
+
+Returns the given activity's streams.
+
+```php
+// $keys is a string array containing required streams
+// e.g. ['latlng', 'time']
+Strava::activityStream($token, $activityID, $keys = '', $keyByType = true);
 ```
 
 #### Activity Comments
