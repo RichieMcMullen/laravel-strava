@@ -32,9 +32,9 @@ class Strava
     #
     # Strava Authenticate
     #
-    public function authenticate()
+    public function authenticate($scope='read_all,profile:read_all,activity:read_all')
     {
-      return redirect('https://www.strava.com/oauth/authorize?client_id='. $this->client_id .'&response_type=code&redirect_uri='. $this->redirect_uri . '&scope=read_all,profile:read_all,activity:read_all&state=strava');
+      return redirect('https://www.strava.com/oauth/authorize?client_id='. $this->client_id .'&response_type=code&redirect_uri='. $this->redirect_uri . '&scope=' . $scope . '&state=strava');
     }
 
 
