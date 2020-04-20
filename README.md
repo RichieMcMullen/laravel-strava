@@ -220,7 +220,7 @@ Strava::unauthenticate($token);
 All methods require an access token, some methods accept additional optional parameters listed below.
 
 - Optional Parameters
-  - $perpage (Int - default 10)
+  - $page (Int - default 1)
   - $perpage (Int - default 10)
   - $before (Int/Timestamp - default = most recent)
   - $after (Int/Timestamp - default = most recent)
