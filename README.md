@@ -128,12 +128,12 @@ class MyController extends Controller
 
 #### Authenticate User
 
-Call the `Strava::authenticate()` method to redirect you to Strava. If authentication is successful the user will be redirected to the `redirect_uri` that you added to the `config` file or your `.env` file.
+Call the `Strava::authenticate()` method to redirect you to Strava. If authentication is successful the user will be redirected to the `redirect_uri` that you added to the `config` file or your `.env` file. You may now also pass ```$scope``` as a parameter when authenticating. You can add or remove scopes as required. Some are required, some are optional. Details on available scopes can be seen here [Strava Authentication Scopes](https://developers.strava.com/docs/authentication/)
 
 ```php
 public function stravaAuth()
 {
-  return Strava::authenticate();
+  return Strava::authenticate($scope='read_all,profile:read_all,activity:read_all');
 }
 ```
 
