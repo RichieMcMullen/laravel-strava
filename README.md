@@ -144,8 +144,7 @@ When returned to the redirected uri, call the `Strava::token($code)` method to g
 ```php
 public function getToken(Request $request)
 {
-  $code = $request->code;
-  $token = Strava::token($code);
+  $token = Strava::token($request->code);
 
   // Store $token->access_token & $token->refresh_token in database
 }
