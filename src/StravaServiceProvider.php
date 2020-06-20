@@ -39,9 +39,9 @@ class StravaServiceProvider extends ServiceProvider
             $client = new Client();
 
             return new Strava(
-              config('ct_strava.client_id'),
-              config('ct_strava.client_secret'),
-              config('ct_strava.redirect_uri'),
+              config('strava.client_id'),
+              config('strava.client_secret'),
+              config('strava.redirect_uri'),
               $client
             );
 
