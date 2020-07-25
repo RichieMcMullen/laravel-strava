@@ -20,7 +20,7 @@ class StravaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->mergeConfigFrom(
-          __DIR__ . '/config/strava.php', 'strava'
+          __DIR__ . '/config/strava.php', 'ct_strava'
         );
 
         $this->publishes([
