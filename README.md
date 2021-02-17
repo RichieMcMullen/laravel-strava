@@ -459,7 +459,7 @@ Strava::getApiUsageLimits();
 ## Parameter Types
 
 ```php
-$token        = String
+$token        = string
 $activityID   = integer
 $athleteID    = integer
 $clubID       = integer
@@ -478,7 +478,7 @@ It's highly recommended that you cache your requests made to Strava for 2 reason
 
 #### (1) Rate Limiting
 
-Strava have quite a good API Rate Limit, 600 requests every 15 minutes, 30,000 daily. If your website has high traffic you might want to consider caching your Strava response data so you don't exceed these limits.
+Strava have API Rate Limit of 100 requests every 15 minutes and 10,000 daily. If your website has high traffic you might want to consider caching your Strava response data so you don't exceed these limits.
 
 #### (2) Website Loading Speed
 
