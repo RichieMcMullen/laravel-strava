@@ -16,6 +16,10 @@ class Strava
     private $client_secret;
     private $redirect_uri;
 
+    private $api_limits = [];
+    private const HEADER_API_ALLOWANCE = 'X-RateLimit-Limit';
+    private const HEADER_API_USAGE = 'X-RateLimit-Usage';
+
 
     #
     # Constructor
@@ -362,6 +366,7 @@ class Strava
     public function post($url, $config)
     {
         $res = $this->client->post( $url, $config );
+        $this->parseApiLimits($res->getHeader(self::HEADER_API_ALLOWANCE), $res->getHeader(self::HEADER_API_USAGE));
         $result = json_decode($res->getBody()->getContents());
         return $result;
     }
@@ -373,6 +378,7 @@ class Strava
     public function get($url, $config)
     {
         $res = $this->client->get( $url, $config );
+        $this->parseApiLimits($res->getHeader(self::HEADER_API_ALLOWANCE), $res->getHeader(self::HEADER_API_USAGE));
         $result = json_decode($res->getBody()->getContents());
         return $result;
     }
@@ -392,4 +398,43 @@ class Strava
     }
 
 
+    #
+    # Return API limits
+    #
+    public function getApiLimits()
+    {
+        return $this->api_limits;
+    }
+
+    public function getApiAllowanceLimits()
+    {
+        return $this->api_limits['allowance'];
+    }
+
+    public function getApiUsageLimits()
+    {
+        return $this->api_limits['usage'];
+    }
+
+    private function parseApiLimits($allowance, $usage)
+    {
+        if (isset($allowance[0])) {
+            $allowance = explode(',', $allowance[0]);
+
+            $this->api_limits['allowance']['15minutes'] = isset($allowance[0]) ? trim($allowance[0]) : null;
+            $this->api_limits['allowance']['daily'] = isset($allowance[1]) ? trim($allowance[1]) : null;
+        } else {
+            $this->api_limits['allowance']['15minutes'] = null;
+            $this->api_limits['allowance']['daily'] = null;
+        }
+
+        if (isset($usage[0])) {
+            $usage = explode(',', $usage[0]);
+            $this->api_limits['usage']['15minutes'] = isset($usage[0]) ? trim($usage[0]) : null;
+            $this->api_limits['usage']['daily'] = isset($usage[1]) ? trim($usage[1]) : null;
+        } else {
+            $this->api_limits['usage']['15minutes'] = null;
+            $this->api_limits['usage']['daily'] = null;
+        }
+    }
 }
