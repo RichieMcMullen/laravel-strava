@@ -34,7 +34,7 @@ class Strava
     #
     public function authenticate($scope='read_all,profile:read_all,activity:read_all')
     {
-      return redirect('https://www.strava.com/oauth/authorize?client_id='. $this->client_id .'&response_type=code&redirect_uri='. $this->redirect_uri . '&scope=' . $scope . '&state=strava');
+        return redirect('https://www.strava.com/oauth/authorize?client_id='. $this->client_id .'&response_type=code&redirect_uri='. $this->redirect_uri . '&scope=' . $scope . '&state=strava');
     }
 
 
@@ -43,14 +43,14 @@ class Strava
     #
     public function unauthenticate($token)
     {
-      $url = 'https://www.strava.com/oauth/deauthorize';
-      $config = [
-          'form_params' => [
-              'access_token' => $token
-          ]
-      ];
-      $res = $this->post($url, $config);
-      return $res;
+        $url = 'https://www.strava.com/oauth/deauthorize';
+        $config = [
+            'form_params' => [
+                'access_token' => $token
+            ]
+        ];
+        $res = $this->post($url, $config);
+        return $res;
     }
 
 
@@ -61,12 +61,12 @@ class Strava
     {
         $url = 'https://www.strava.com/oauth/token';
         $config = [
-          'form_params' => [
-              'client_id' => $this->client_id,
-              'client_secret' => $this->client_secret,
-              'code' => $code,
-              'grant_type' => 'authorization_code'
-          ]
+            'form_params' => [
+                'client_id' => $this->client_id,
+                'client_secret' => $this->client_secret,
+                'code' => $code,
+                'grant_type' => 'authorization_code'
+            ]
         ];
         $res = $this->post($url, $config);
         return $res;
@@ -80,12 +80,12 @@ class Strava
     {
         $url = 'https://www.strava.com/oauth/token';
         $config = [
-          'form_params' => [
-              'client_id' => $this->client_id,
-              'client_secret' => $this->client_secret,
-              'refresh_token' => $refreshToken,
-              'grant_type' => 'refresh_token'
-          ]
+            'form_params' => [
+                'client_id' => $this->client_id,
+                'client_secret' => $this->client_secret,
+                'refresh_token' => $refreshToken,
+                'grant_type' => 'refresh_token'
+            ]
         ];
         $res = $this->post($url, $config);
         return $res;
@@ -144,7 +144,7 @@ class Strava
     {
         if ($keys != '')
             $keys = join(",", $keys);
-        
+
         $url = $this->strava_uri . '/activities/'. $activityID .'/streams?keys='. $keys .'&key_by_type'. $keyByType;
         $config = $this->bearer($token);
         $res = $this->get($url, $config);
@@ -383,12 +383,12 @@ class Strava
     #
     private function bearer($token)
     {
-      $config = [
-        'headers' => [
-            'Authorization' => 'Bearer '.$token.''
-        ],
-      ];
-      return $config;
+        $config = [
+            'headers' => [
+                'Authorization' => 'Bearer '.$token.''
+            ],
+        ];
+        return $config;
     }
 
 

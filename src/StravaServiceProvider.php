@@ -20,11 +20,11 @@ class StravaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->mergeConfigFrom(
-          __DIR__ . '/config/strava.php', 'ct_strava'
+            __DIR__ . '/config/strava.php', 'ct_strava'
         );
 
         $this->publishes([
-          __DIR__ . '/config/strava.php' => config_path('ct_strava.php')
+            __DIR__ . '/config/strava.php' => config_path('ct_strava.php')
         ]);
     }
 
@@ -39,10 +39,10 @@ class StravaServiceProvider extends ServiceProvider
             $client = new Client();
 
             return new Strava(
-              config('ct_strava.client_id'),
-              config('ct_strava.client_secret'),
-              config('ct_strava.redirect_uri'),
-              $client
+                config('ct_strava.client_id'),
+                config('ct_strava.client_secret'),
+                config('ct_strava.redirect_uri'),
+                $client
             );
 
         });
