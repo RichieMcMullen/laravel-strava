@@ -7,7 +7,6 @@
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/richiemcmullen/laravel-strava.svg">
   <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/richiemcmullen/laravel-strava.svg">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/richiemcmullen/laravel-strava.svg">
-  <img alt="Maintenance" src="https://img.shields.io/maintenance/yes/2020.svg">
 </div>
 
 # Laravel Strava Package
