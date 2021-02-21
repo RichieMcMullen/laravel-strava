@@ -396,11 +396,62 @@ List of the authenticated athlete's starred segments.
 Strava::starredSegments($token, $page, $perPage);
 ```
 
+## Getting API Limits 
+  
+Strava returns information about API calls allowance and usage in response headers.
+
+The methods listed below will return  this information upon a call which uses up the API limit (like fetching activities). Some calls like refreshing access tokens seem not to use up the API call limit, that's why you will get nulls in the resulting array.
+
+As well when you try to get the limits at the very beginning, before any API call using up the limits , you will receive nulls. The default allowance limits are not hardcoded as different accounts may have different limits.
+  
+#### All API Limits 
+Returns all limits in a multidimensional array, eg.:
+
+```php  
+[  
+	['allowance']['15minutes'] => "100",  
+	['allowance']['daily'] => "1000",  
+	['usage']['15minutes'] => "7",  
+	['usage']['daily'] => "352",  
+]
+```  
+  
+```php  
+Strava::getApiLimits();
+```  
+#### Allocated API Limits 
+Returns daily and 15-minute request limits available for the Strava account , eg.:
+
+```php  
+[  
+	['15minutes'] => '100',  
+	['daily'] => '1000',  
+]
+```  
+  
+```php  
+Strava::getApiAllowanceLimits();
+```  
+
+#### Used API Calls
+Returns number of daily and 15-minute calls used up at the Strava account , eg.:
+
+```php  
+[  
+	['15minutes'] => '7',  
+	['daily'] => '352',  
+]
+```  
+  
+```php  
+Strava::getApiUsageLimits();
+```  
+
 
 ## Parameter Types
 
 ```php
-$token        = String
+$token        = string
 $activityID   = integer
 $athleteID    = integer
 $clubID       = integer
@@ -419,7 +470,7 @@ It's highly recommended that you cache your requests made to Strava for 2 reason
 
 #### (1) Rate Limiting
 
-Strava have quite a good API Rate Limit, 600 requests every 15 minutes, 30,000 daily. If your website has high traffic you might want to consider caching your Strava response data so you don't exceed these limits.
+Strava have API Rate Limit of 100 requests every 15 minutes and 10,000 daily. If your website has high traffic you might want to consider caching your Strava response data so you don't exceed these limits.
 
 #### (2) Website Loading Speed
 

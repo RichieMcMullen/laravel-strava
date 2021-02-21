@@ -16,6 +16,10 @@ class Strava
     private $client_secret;
     private $redirect_uri;
 
+    private $api_limits = [];
+    private const HEADER_API_ALLOWANCE = 'X-RateLimit-Limit';
+    private const HEADER_API_USAGE = 'X-RateLimit-Usage';
+
 
     #
     # Constructor
@@ -34,7 +38,7 @@ class Strava
     #
     public function authenticate($scope='read_all,profile:read_all,activity:read_all')
     {
-      return redirect('https://www.strava.com/oauth/authorize?client_id='. $this->client_id .'&response_type=code&redirect_uri='. $this->redirect_uri . '&scope=' . $scope . '&state=strava');
+        return redirect('https://www.strava.com/oauth/authorize?client_id='. $this->client_id .'&response_type=code&redirect_uri='. $this->redirect_uri . '&scope=' . $scope . '&state=strava');
     }
 
 
@@ -43,14 +47,14 @@ class Strava
     #
     public function unauthenticate($token)
     {
-      $url = 'https://www.strava.com/oauth/deauthorize';
-      $config = [
-          'form_params' => [
-              'access_token' => $token
-          ]
-      ];
-      $res = $this->post($url, $config);
-      return $res;
+        $url = 'https://www.strava.com/oauth/deauthorize';
+        $config = [
+            'form_params' => [
+                'access_token' => $token
+            ]
+        ];
+        $res = $this->post($url, $config);
+        return $res;
     }
 
 
@@ -61,12 +65,12 @@ class Strava
     {
         $url = 'https://www.strava.com/oauth/token';
         $config = [
-          'form_params' => [
-              'client_id' => $this->client_id,
-              'client_secret' => $this->client_secret,
-              'code' => $code,
-              'grant_type' => 'authorization_code'
-          ]
+            'form_params' => [
+                'client_id' => $this->client_id,
+                'client_secret' => $this->client_secret,
+                'code' => $code,
+                'grant_type' => 'authorization_code'
+            ]
         ];
         $res = $this->post($url, $config);
         return $res;
@@ -80,12 +84,12 @@ class Strava
     {
         $url = 'https://www.strava.com/oauth/token';
         $config = [
-          'form_params' => [
-              'client_id' => $this->client_id,
-              'client_secret' => $this->client_secret,
-              'refresh_token' => $refreshToken,
-              'grant_type' => 'refresh_token'
-          ]
+            'form_params' => [
+                'client_id' => $this->client_id,
+                'client_secret' => $this->client_secret,
+                'refresh_token' => $refreshToken,
+                'grant_type' => 'refresh_token'
+            ]
         ];
         $res = $this->post($url, $config);
         return $res;
@@ -144,7 +148,7 @@ class Strava
     {
         if ($keys != '')
             $keys = join(",", $keys);
-        
+
         $url = $this->strava_uri . '/activities/'. $activityID .'/streams?keys='. $keys .'&key_by_type'. $keyByType;
         $config = $this->bearer($token);
         $res = $this->get($url, $config);
@@ -362,6 +366,7 @@ class Strava
     public function post($url, $config)
     {
         $res = $this->client->post( $url, $config );
+        $this->parseApiLimits($res->getHeader(self::HEADER_API_ALLOWANCE), $res->getHeader(self::HEADER_API_USAGE));
         $result = json_decode($res->getBody()->getContents());
         return $result;
     }
@@ -373,6 +378,7 @@ class Strava
     public function get($url, $config)
     {
         $res = $this->client->get( $url, $config );
+        $this->parseApiLimits($res->getHeader(self::HEADER_API_ALLOWANCE), $res->getHeader(self::HEADER_API_USAGE));
         $result = json_decode($res->getBody()->getContents());
         return $result;
     }
@@ -383,13 +389,52 @@ class Strava
     #
     private function bearer($token)
     {
-      $config = [
-        'headers' => [
-            'Authorization' => 'Bearer '.$token.''
-        ],
-      ];
-      return $config;
+        $config = [
+            'headers' => [
+                'Authorization' => 'Bearer '.$token.''
+            ],
+        ];
+        return $config;
     }
 
 
+    #
+    # Return API limits
+    #
+    public function getApiLimits()
+    {
+        return $this->api_limits;
+    }
+
+    public function getApiAllowanceLimits()
+    {
+        return $this->api_limits['allowance'];
+    }
+
+    public function getApiUsageLimits()
+    {
+        return $this->api_limits['usage'];
+    }
+
+    private function parseApiLimits($allowance, $usage)
+    {
+        if (isset($allowance[0])) {
+            $allowance = explode(',', $allowance[0]);
+
+            $this->api_limits['allowance']['15minutes'] = isset($allowance[0]) ? trim($allowance[0]) : null;
+            $this->api_limits['allowance']['daily'] = isset($allowance[1]) ? trim($allowance[1]) : null;
+        } else {
+            $this->api_limits['allowance']['15minutes'] = null;
+            $this->api_limits['allowance']['daily'] = null;
+        }
+
+        if (isset($usage[0])) {
+            $usage = explode(',', $usage[0]);
+            $this->api_limits['usage']['15minutes'] = isset($usage[0]) ? trim($usage[0]) : null;
+            $this->api_limits['usage']['daily'] = isset($usage[1]) ? trim($usage[1]) : null;
+        } else {
+            $this->api_limits['usage']['15minutes'] = null;
+            $this->api_limits['usage']['daily'] = null;
+        }
+    }
 }
