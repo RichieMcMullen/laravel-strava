@@ -361,6 +361,18 @@ class Strava
 
 
     #
+    # Strava Segments explore
+    #
+    public function exploreSegments($token, $bounds, $activity_type)
+    {
+        $url = $this->strava_uri . '/segments/explore?bounds='. $bounds .'&activity_type=' . $activity_type;
+        $config = $this->bearer($token);
+        $res = $this->get($url, $config);
+        return $res;
+    }
+
+    
+    #
     # Strava POST
     #
     public function post($url, $config)
