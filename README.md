@@ -36,6 +36,7 @@ A laravel package to access data from the Strava API. Compatible with ```Laravel
   - [Activity Kudos](https://github.com/RichieMcMullen/strava#activity-kudos)
   - [Activity Laps](https://github.com/RichieMcMullen/strava#activity-laps)
   - [Activity Zones](https://github.com/RichieMcMullen/strava#activity-zones)
+  - [Update Activity](https://github.com/RichieMcMullen/strava#update-activity)
   - [Athlete Zones](https://github.com/RichieMcMullen/strava#athlete-zones)
   - [Athlete Stats](https://github.com/RichieMcMullen/strava#athlete-stats)
   - [Club](https://github.com/RichieMcMullen/strava#club)
@@ -290,6 +291,33 @@ Summit Feature Required. Returns the zones of a given activity.
 ```php
 Strava::activityZones($token, $activityID);
 ```
+
+#### Update Activity
+
+Updates the given activity that is owned by the authenticated athlete. Requires `activity:write`, so in order to update activities, you will need to authenticate as follows: `Strava::authenticate('read_all,profile:read_all,activity:read_all,activity:write');`.
+
+```php
+Strava::updateActivityById($token, $activityID, array $updateableActivity);
+```
+
+You may update one or more individual parameters from the following:
+
+```php
+// Example $updateableActivity
+$updateableActivity = [
+    'commute' => false,
+    'trainer' => false,
+    'description' => 'Easier ride than usual',
+    'name' => 'Fun ride',
+    'type' => 'Ride', // string, instance of ActivityType
+    'gear_id' => 'b12345678987654321',
+];
+```
+
+Find additional details in the official Strava documentation:
+
+- [UpdateableActivity](https://developers.strava.com/docs/reference/#api-models-UpdatableActivity)
+- [ActivityType](https://developers.strava.com/docs/reference/#api-models-ActivityType)
 
 #### Athlete Zones
 

@@ -142,6 +142,18 @@ class Strava
 
 
     #
+    # Update Strava Single Activity
+    #
+    public function updateActivityById($token, $activityID, array $updateableActivity)
+    {
+        $url = $this->strava_uri . '/activities/'. $activityID;
+        $config = array_merge($this->bearer($token), ['form_params' => $updateableActivity]);
+        $res = $this->put($url, $config, $updateableActivity);
+        return $res;
+    }
+
+
+    #
     # Strava Single Activity Stream
     #
     public function activityStream($token, $activityID, $keys = '', $keyByType = true)
@@ -366,6 +378,18 @@ class Strava
     public function post($url, $config)
     {
         $res = $this->client->post( $url, $config );
+        $this->parseApiLimits($res->getHeader(self::HEADER_API_ALLOWANCE), $res->getHeader(self::HEADER_API_USAGE));
+        $result = json_decode($res->getBody()->getContents());
+        return $result;
+    }
+
+
+    #
+    # Strava PUT
+    #
+    public function put($url, $config)
+    {
+        $res = $this->client->put($url, $config);
         $this->parseApiLimits($res->getHeader(self::HEADER_API_ALLOWANCE), $res->getHeader(self::HEADER_API_USAGE));
         $result = json_decode($res->getBody()->getContents());
         return $result;
