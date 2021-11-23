@@ -140,6 +140,17 @@ class Strava
         return $res;
     }
 
+    #
+    # Strava Single Activity Photos
+    #
+    public function activityPhotos($token, $activityID)
+    {
+        $url = $this->strava_uri . '/activities/'. $activityID .'/photos';
+        $config = $this->bearer($token);
+        $res = $this->get($url, $config);
+        return $res;
+    }
+
 
     #
     # Update Strava Single Activity
