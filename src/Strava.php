@@ -359,6 +359,21 @@ class Strava
         return $res;
     }
 
+    
+    #
+    # Strava Activity Segment Stream
+    #
+    public function segmentStream($token, $segmentID, $keys = '', $keyByType = true)
+    {
+        if ($keys != '')
+            $keys = join(",", $keys);
+
+        $url = $this->strava_uri . '/segments/'. $segmentID .'/streams?keys='. $keys .'&key_by_type'. $keyByType;
+        $config = $this->bearer($token);
+        $res = $this->get($url, $config);
+        return $res;
+    }
+
 
     #
     # Strava List Starred Segments
