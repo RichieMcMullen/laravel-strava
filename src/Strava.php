@@ -139,6 +139,20 @@ class Strava
         $res = $this->get($url, $config);
         return $res;
     }
+    
+    #
+    # Strava Create Activity
+    #
+    public function createActivity($token, $data = [])
+    {
+        $url = $this->strava_uri . '/activities';
+        $config = $this->bearer($token);
+        $config = array_merge($config, [
+            'form_params' => $data
+        ]);
+        $res = $this->post($url, $config);
+        return $res;
+    }
 
 
     #
