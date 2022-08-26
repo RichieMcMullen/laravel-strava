@@ -36,9 +36,17 @@ class Strava
     #
     # Strava Authenticate
     #
-    public function authenticate($scope='read_all,profile:read_all,activity:read_all')
+    public function authenticate($scope = 'read_all,profile:read_all,activity:read_all', $redirect_uri = null)
     {
-        return redirect('https://www.strava.com/oauth/authorize?client_id='. $this->client_id .'&response_type=code&redirect_uri='. $this->redirect_uri . '&scope=' . $scope . '&state=strava');
+        $query = http_build_query([
+            'client_id' => $this->client_id,
+            'response_type' => 'code',
+            'redirect_uri' => $redirect_uri ?: $this->redirect_uri,
+            'scope' => $scope,
+            'state' => 'strava',
+        ]);
+
+        return redirect("https://www.strava.com/oauth/authorize?{$query}");
     }
 
 
