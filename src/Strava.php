@@ -390,7 +390,7 @@ class Strava
         if ($keys != '')
             $keys = join(",", $keys);
 
-        $url = $this->strava_uri . '/segments/'. $segmentID .'/streams?keys='. $keys .'&key_by_type'. $keyByType;
+        $url = $this->strava_uri . '/segments/'. $segmentID .'/streams?keys='. $keys .'&key_by_type='. $keyByType;
         $config = $this->bearer($token);
         $res = $this->get($url, $config);
         return $res;
